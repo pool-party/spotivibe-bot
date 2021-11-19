@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.github.pool_party.spotivibe"
-version = "1.0-SNAPSHOT"
+version = "0.1"
 
 repositories {
     maven("https://jitpack.io")
