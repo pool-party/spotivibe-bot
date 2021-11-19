@@ -2,7 +2,7 @@ package com.github.pool_party.spotivibe.message
 
 import com.adamratzman.spotify.models.Track
 import com.elbekD.bot.types.Message
-import com.github.pool_party.spotivibe.escapeParentheses
+import com.github.pool_party.spotivibe.escape
 import com.github.pool_party.spotivibe.toLine
 
 const val WRONG_USAGE = "Wrong usage"
@@ -22,7 +22,7 @@ fun voteMessage(rounds: Int, currentRound: Int, first: Track, second: Track) =
     """.trimIndent()
 
 fun votedMessage(previousMessage: Message, first: Track, second: Track, isFirst: Boolean): String {
-    val firstLine = previousMessage.text?.takeWhile { it != '\n' }?.escapeParentheses() ?: ""
+    val firstLine = previousMessage.text?.takeWhile { it != '\n' }?.escape() ?: ""
     return "$firstLine\n\n" +
         if (isFirst) {
             """
@@ -39,6 +39,6 @@ fun votedMessage(previousMessage: Message, first: Track, second: Track, isFirst:
 
 fun voteButtonMessage(isFirst: Boolean, voted: Int): String {
     val number = if (isFirst) """1️⃣""" else """2️⃣"""
-    val votedNumber = if (voted != 0) " - $voted" else ""
+    val votedNumber = if (voted != 0) " — $voted" else ""
     return "$number$votedNumber"
 }
