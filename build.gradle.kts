@@ -34,6 +34,21 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    configurations["compileClasspath"].forEach { from(zipTree(it.absoluteFile)) }
+    configurations["runtimeClasspath"].forEach { from(zipTree(it.absoluteFile)) }
+
+    manifest {
+        attributes(
+            mapOf(
+                "Main-Class" to "com.github.pool_party.spotivibe.MainKt"
+            )
+        )
+    }
+}
+
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
