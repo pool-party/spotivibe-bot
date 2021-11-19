@@ -97,6 +97,7 @@ class VoteCallback : Callback<CallbackData> {
                     message.message_id,
                     votedMessage(message, first, second, isFirst),
                     disableWebPagePreview = true,
+                    markup = null,
                 )
             }
 
