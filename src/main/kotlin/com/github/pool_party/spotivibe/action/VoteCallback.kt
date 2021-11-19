@@ -60,7 +60,11 @@ class VoteCallback : Callback<CallbackData> {
         answerCallbackQuery(callbackQuery.id)
 
         mutex.withLock {
-            chatInfo.voted[callbackQuery.from.id] = data.isFirst
+            val fromId = callbackQuery.from.id
+            val previous = chatInfo.voted[fromId]
+            chatInfo.voted[fromId] = data.isFirst
+
+            if (previous == data.isFirst) return
 
             val forFirst = voted.values.asSequence().filter { it }.count()
             val forSecond = voted.values.asSequence().filter { !it }.count()
@@ -81,6 +85,7 @@ class VoteCallback : Callback<CallbackData> {
 
             current.removeFirst()
             current.removeFirst()
+            chatInfo.voted.clear()
 
             val isFirst = forFirst >= forSecond
 
