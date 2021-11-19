@@ -44,34 +44,34 @@ suspend fun Bot.vote(chatId: Long) {
         ).toMarkUp(),
         disableWebPagePreview = true,
     ).await()
-
-    val previews = listOf(first, second).mapNotNull { it to (it.previewUrl ?: return@mapNotNull null) }
-
-    when (previews.size) {
-        1 -> {
-            val (track, preview) = previews[0]
-            val message = sendAudio(
-                chatId,
-                audio = preview,
-                duration = 30,
-                performer = track.artists.joinToString(", "), // TODO
-                title = track.name
-            ).await()
-            chatInfo.previews.add(message.message_id)
-        }
-        2 -> {
-            val message = sendMediaGroup(
-                chatId,
-                previews.map {
-                    mediaAudio(
-                        it.second,
-                        duration = 30,
-                        performer = "a", // it.first.artists.joinToString(", "),
-                        title = "b", // it.first.name
-                    )
-                }
-            ).await()
-            chatInfo.previews.addAll(message.map { it.message_id })
-        }
-    }
+//
+//    val previews = listOf(first, second).mapNotNull { it to (it.previewUrl ?: return@mapNotNull null) }
+//
+//    when (previews.size) {
+//        1 -> {
+//            val (track, preview) = previews[0]
+//            val message = sendAudio(
+//                chatId,
+//                audio = preview,
+//                duration = 30,
+//                performer = track.artists.joinToString(", "), // TODO
+//                title = track.name
+//            ).await()
+//            chatInfo.previews.add(message.message_id)
+//        }
+//        2 -> {
+//            val message = sendMediaGroup(
+//                chatId,
+//                previews.map {
+//                    mediaAudio(
+//                        it.second,
+//                        duration = 30,
+//                        performer = "a", // it.first.artists.joinToString(", "),
+//                        title = "b", // it.first.name
+//                    )
+//                }
+//            ).await()
+//            chatInfo.previews.addAll(message.map { it.message_id })
+//        }
+//    }
 }
