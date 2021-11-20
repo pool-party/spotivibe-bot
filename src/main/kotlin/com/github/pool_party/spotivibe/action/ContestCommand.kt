@@ -9,7 +9,6 @@ import com.github.pool_party.flume.utils.chatId
 import com.github.pool_party.flume.utils.sendMessageLogging
 import com.github.pool_party.spotivibe.ChatInfo
 import com.github.pool_party.spotivibe.Configuration
-import com.github.pool_party.spotivibe.chatInfos
 import com.github.pool_party.spotivibe.message.EMPTY_PLAYLIST
 import com.github.pool_party.spotivibe.message.INVALID_URI
 import com.github.pool_party.spotivibe.message.INVALID_VOTERS
@@ -75,8 +74,8 @@ class ContestCommand :
         }
 
         val pow2 = 2.0.pow(floor(log2(tracks.size.toDouble()))).roundToInt()
-        chatInfos[chatId] = ChatInfo(voters, tracks.asSequence().shuffled().take(pow2).toMutableList())
+        val chatInfo = ChatInfo(chatId, voters, tracks.asSequence().shuffled().take(pow2).toMutableList())
 
-        vote(chatId)
+        vote(chatInfo)
     }
 }

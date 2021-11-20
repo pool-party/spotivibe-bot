@@ -2,12 +2,13 @@ package com.github.pool_party.spotivibe
 
 import com.adamratzman.spotify.models.Track
 
-val chatInfos = mutableMapOf<Long, ChatInfo>()
+val polls = mutableMapOf<String, ChatInfo>()
 
 data class ChatInfo(
+    val chatId: Long,
     val voters: Int,
     var currentList: MutableList<Track>,
     var nextList: MutableList<Track> = mutableListOf(),
-    val previews: MutableList<Int> = mutableListOf(),
-    val voted: MutableMap<Int, Boolean> = mutableMapOf()
+    var voted: MutableMap<Int, Boolean> = mutableMapOf(),
+    var pollMessageId: Int? = null,
 )
