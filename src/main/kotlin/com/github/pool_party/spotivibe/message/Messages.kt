@@ -18,4 +18,4 @@ const val INVALID_URI = "Illegal Spotify ID/URI"
 
 const val EMPTY_PLAYLIST = "Playlist is empty"
 
-fun voteMessage(rounds: Int, currentRound: Int) = "Round of 1/$rounds ($currentRound/$rounds):"
+fun voteMessage(rounds: Int, currentRound: Int) = "Round of 1/$rounds ($currentRound/$rounds)"
