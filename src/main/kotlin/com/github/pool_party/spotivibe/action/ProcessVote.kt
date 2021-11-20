@@ -4,10 +4,12 @@ import com.elbekD.bot.Bot
 import com.elbekD.bot.types.PollAnswer
 import com.github.pool_party.flume.interaction.Interaction
 import com.github.pool_party.spotivibe.polls
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import mu.KotlinLogging
 import java.lang.Integer.max
+import kotlin.time.Duration.Companion.seconds
 
 class ProcessVote : Interaction {
 
@@ -57,6 +59,8 @@ class ProcessVote : Interaction {
         val second = currentList.removeFirst()
 
         chatInfo.nextList.add(if (isFirst) first else second)
+
+        delay(1.seconds)
         vote(chatInfo)
     }
 }
